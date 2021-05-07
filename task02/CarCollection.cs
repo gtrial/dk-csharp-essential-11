@@ -1,18 +1,31 @@
-﻿using System;
+﻿using System.Linq;
+
 namespace task02
 {
     public class CarCollection<T>
     {
-        public CarCollection()
-        {
-        }
-        //Создайте класс CarCollection<T>.
-        //Реализуйте в простейшем приближении возможность использования его экземпляра для создания парка машин.
-        //Минимально требуемый интерфейс взаимодействия с экземпляром, должен включать метод добавления машин
-        //с названием машины и года ее выпуска, индексатор для получения значения элемента по указанному индексу
-        //и свойство только для чтения для получения общего количества элементов.
-        //Создайте метод удаления всех машин автопарка.
+        private T[] Cars { get; set; }
 
-        //this[] - indexer?
+        public CarCollection(T[] items)
+        {
+            Cars = items;
+        }
+
+        public void Add(T item)
+        {
+            var enumerable = Cars.Append(item);
+        }
+
+        public T this[int i] => Cars[i];
+
+        public int Length()
+        {
+            return Cars.Length;
+        }
+
+        public void RemoveAll()
+        {
+            Cars = new T[]{};
+        }
     }
 }
