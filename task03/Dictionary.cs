@@ -1,14 +1,27 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System.Linq;
+
 namespace task03
 {
     public class Dictionary<TKey, TValue>
     {
-        public Dictionary()
+        private IEnumerable<TKey> _keys;
+        private IEnumerable<TValue> _values;
+
+        public Dictionary(IEnumerable<TKey> keys, IEnumerable<TValue> values)
         {
+            _keys = keys;
+            _values = values;
         }
-        //Создайте класс Dictionary<TKey,TValue>.
-        //Реализуйте в простейшем приближении возможность использования его экземпляра аналогично экземпляру класса Dictionary из пространства имен System.Collections.Generic.
-        //Минимально требуемый интерфейс взаимодействия с экземпляром, должен включать метод добавления пар элементов,
-        //индексатор для получения значения элемента по указанному индексу и свойство только для чтения для получения общего количества пар элементов.
+
+        public void Add(TKey key, TValue value)
+        {
+            _keys = _keys.Append(key);
+            _values = _values.Append(value);
+        }
+
+        public TValue this[int i] => _values.ElementAt(i);
+
+        public int Count => _keys.Count();
     }
 }
